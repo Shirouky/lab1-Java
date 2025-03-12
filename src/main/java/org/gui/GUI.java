@@ -77,8 +77,8 @@ public class GUI extends JFrame {
             try {
                 var path = this.gui.pathField.getText();
                 var sheet = this.gui.sheetField.getText();
-//                var path = "D:\\МИФИ\\4 семестр\\Теория и технология программирования\\lab1\\Data Samples.xlsx";
-//                var sheet = "Вариант 1";
+//                path = "D:\\МИФИ\\4 семестр\\Теория и технология программирования\\lab1\\Data Samples.xlsx";
+//                sheet = "Вариант 1";
                 this.gui.controller.importData(path, sheet);
                 this.gui.buttonCalc.setEnabled(true);
             } catch (ParseException | IOException ex) {

@@ -36,3 +36,11 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### My ###
+'.\Saved results.xlsx'
+.Data Samples.xlsx
+.Отчет.pdf
+.idea/artifacts/lab1_jar.xml
+/out/
+
