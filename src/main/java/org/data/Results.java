@@ -1,7 +1,9 @@
 package org.data;
 
+import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.distribution.TDistribution;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,8 +52,11 @@ public class Results {
             this.standardDeviation.put(key, stats.getStandardDeviation());
             this.varianceCoefficient.put(key, stats.getStandardDeviation() / stats.getMean());
 
-            double confidenceLevel = 1.66;
-            double temp = confidenceLevel * Math.sqrt(stats.getStandardDeviation() / selection.size());
+            NormalDistribution distribution = new NormalDistribution(stats.getMean(), stats.getStandardDeviation());
+            TDistribution tDistribution = new TDistribution(selection.size() - 1);
+            double confidenceLevel = tDistribution.inverseCumulativeProbability(0.95);
+//            double confidenceLevel = distribution.inverseCumulativeProbability(0.95);
+            double temp = confidenceLevel * stats.getStandardDeviation() / Math.sqrt(selection.size());
             this.confidenceInterval.put(key, new Double[]{stats.getMean() - temp, stats.getMean() + temp});
         }
     }

@@ -33,7 +33,11 @@ public class Controller {
             } else {
                 int index = 0;
                 for (String key : this.data.keySet()) {
-                    this.data.get(key).add(Double.parseDouble(row.getCell(index).toString()));
+                    var cell = row.getCell(index);
+                    if (cell.getCellType() == CellType.FORMULA) {
+                        cell.removeFormula();
+                    }
+                    this.data.get(key).add(Double.parseDouble(cell.toString()));
                     index++;
                 }
             }
