@@ -1,5 +1,7 @@
 package org.main;
 
+import org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException;
+import org.apache.poi.openxml4j.exceptions.OLE2NotOfficeXmlFileException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 import org.data.Results;
@@ -19,7 +21,7 @@ public class Controller {
         return this.results.export();
     }
 
-    public void importData(String path, String sheetName) throws IOException, ParseException {
+    public void importData(String path, String sheetName) throws IOException, ParseException, IllegalArgumentException, OLE2NotOfficeXmlFileException, NotOfficeXmlFileException, NullPointerException {
         FileInputStream file = new FileInputStream(path);
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet sheet = workbook.getSheet(sheetName);
@@ -37,7 +39,7 @@ public class Controller {
                     if (cell.getCellType() == CellType.FORMULA) {
                         cell.removeFormula();
                     }
-                    this.data.get(key).add(Double.parseDouble(cell.toString()));
+                    this.data.get(sheet.getRow(0).getCell(index).toString()).add(Double.parseDouble(cell.toString()));
                     index++;
                 }
             }

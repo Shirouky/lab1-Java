@@ -1,5 +1,7 @@
 package org.gui;
 
+import org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException;
+import org.apache.poi.openxml4j.exceptions.OLE2NotOfficeXmlFileException;
 import org.main.Controller;
 
 import java.awt.*;
@@ -77,8 +79,8 @@ public class GUI extends JFrame {
             try {
                 var path = this.gui.pathField.getText();
                 var sheet = this.gui.sheetField.getText();
-//                path = "D:\\МИФИ\\4 семестр\\Теория и технология программирования\\lab1\\Data Samples.xlsx";
-//                sheet = "Вариант 3";
+                path = "D:\\МИФИ\\4 семестр\\Теория и технология программирования\\lab1\\Data Samples.xlsx";
+                sheet = "Вариант 3";
                 this.gui.controller.importData(path, sheet);
                 this.gui.buttonCalc.setEnabled(true);
             } catch (ParseException | IOException ex) {
@@ -87,6 +89,12 @@ public class GUI extends JFrame {
                 JOptionPane.showMessageDialog(this.gui, "Please select different sheet");
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this.gui, "Wrong number format in file");
+            }  catch (OLE2NotOfficeXmlFileException ex) {
+                JOptionPane.showMessageDialog(this.gui, "Error");
+            }  catch (NotOfficeXmlFileException ex) {
+                JOptionPane.showMessageDialog(this.gui, "Error xlm file");
+            }  catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(this.gui, "Error");
             }
         }
     }

@@ -54,7 +54,8 @@ public class Results {
 
             NormalDistribution distribution = new NormalDistribution(stats.getMean(), stats.getStandardDeviation());
             TDistribution tDistribution = new TDistribution(selection.size() - 1);
-            double confidenceLevel = tDistribution.inverseCumulativeProbability(0.95);
+            double confidenceLevel = tDistribution.inverseCumulativeProbability((1 - 0.95) / 2);
+            System.out.println(confidenceLevel);
 //            double confidenceLevel = distribution.inverseCumulativeProbability(0.95);
             double temp = confidenceLevel * stats.getStandardDeviation() / Math.sqrt(selection.size());
             this.confidenceInterval.put(key, new Double[]{stats.getMean() - temp, stats.getMean() + temp});
