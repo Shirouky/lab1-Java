@@ -119,7 +119,7 @@ public class Controller {
             index++;
         }
 
-        FileOutputStream out = new FileOutputStream("D:\\МИФИ\\4 семестр\\Теория и технология программирования\\lab1\\Saved results.xlsx");
+        FileOutputStream out = new FileOutputStream("Saved results.xlsx");
         workbook.write(out);
         out.close();
 
